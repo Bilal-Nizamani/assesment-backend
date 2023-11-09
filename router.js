@@ -2,7 +2,7 @@ import { Router } from "express";
 import axios from "axios";
 const router = Router();
 
-const apiUrl = process.env.API || "https://api.magicthegathering.io/v1/cards";
+const apiUrl = process.env.API;
 
 router.get("/api/cards", async (req, res) => {
   try {
