@@ -6,17 +6,13 @@ const apiUrl = process.env.API || "https://api.magicthegathering.io/v1/cards";
 
 router.get("/api/cards", async (req, res) => {
   try {
-    // Define the base URL
-
-    // Set the page size to 20
-
     // Extract the page parameter from the request
     const { page } = req.query;
 
     // Make the request to the Magic: The Gathering API
     const response = await axios.get(apiUrl, {
       params: {
-        page: page || 1, // Default to page 1 if not provided
+        page: page || 1,
         pageSize: 20,
       },
     });
