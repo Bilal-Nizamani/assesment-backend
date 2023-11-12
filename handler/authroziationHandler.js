@@ -23,7 +23,6 @@ const userRegisterHandler = async (req, res, next) => {
       console.log("duplicate name or user");
       const duplicateKey = Object.keys(err.keyPattern)[0];
       const duplicateValue = err.keyValue[duplicateKey];
-      console.log(duplicateKey, duplicateValue);
 
       return res.status(200).json({
         success: false,
@@ -42,12 +41,7 @@ const userRegisterHandler = async (req, res, next) => {
 
 const userLoginHandler = async (req, res, next) => {
   try {
-    console.log(req.body);
-    const user = await User.findOne(
-      { username: req.body.username },
-      "username hash salt"
-    );
-
+    const user = await User.findOne({ username: req.body.username });
     if (!user) {
       // user not found
       return res
@@ -63,6 +57,7 @@ const userLoginHandler = async (req, res, next) => {
       res.status(200).json({
         success: true,
         token: tokenObject.token,
+        user: user,
         expiresIn: tokenObject.expires,
       });
     } else {
