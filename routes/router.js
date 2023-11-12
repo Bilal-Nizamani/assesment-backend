@@ -2,8 +2,14 @@ import { Router } from "express";
 import dotenv from "dotenv";
 import axios from "axios";
 import stripe from "stripe";
+import {
+  userRegisterHandler,
+  userLoginHandler,
+} from "../handler/authroziationHandler.js";
 dotenv.config();
 
+const stripeSecretKey = process.env.SECRET_KEY;
+const stripeInstance = new stripe(stripeSecretKey);
 const router = Router();
 const apiUrl = process.env.API;
 router.get("/api/cards", async (req, res) => {
@@ -28,11 +34,13 @@ router.get("/api/cards", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-const stripeSecretKey = process.env.SECRET_KEY;
-const stripeInstance = new stripe(stripeSecretKey);
+router.post("/register", userRegisterHandler);
+router.post("/login", userLoginHandler);
+
 router.post("/payment-checkout", async (req, res) => {
   try {
     const { item } = req.body;
+    console.log(item);
     const redirectURL =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
