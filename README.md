@@ -1,3 +1,5 @@
+If .pem extenstion file is not working make sure to run file generateKeypair  "node generateKeypair" generate these files
+
 I've deliberately provided the .env file for a project that involves five routes—two for fetching data and three for posting data.
 
 GET /api/cards: This route is designed for fetching cards dynamically from an open-source API. No authentication is required for this operation.
