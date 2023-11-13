@@ -57,8 +57,10 @@ const stripeRouteHandler = async (req, res) => {
     // switch (session.payment_status) {
     //   case "paid": {
     //     // Create a new card object with the card data
+
     //     // Push the new card to the user's cards array
     //     currentUser.cards.push(card);
+
     //     // Save the user instance to persist the changes in the database
     //     await currentUser.save();
     //     break;

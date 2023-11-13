@@ -30,8 +30,7 @@ const getUserDataRouteHander = async (req, res) => {
   try {
     // Fetch user by ID
     const { userId } = req.query;
-    const fieldsToInclude = "username email _id";
-    const currentUser = await User.findById(userId).select(fieldsToInclude);
+    const currentUser = await User.findById(userId);
     if (!currentUser) {
       // User not found
       return res.status(200).json({
