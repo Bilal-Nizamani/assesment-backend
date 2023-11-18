@@ -1,16 +1,44 @@
 import mongoose from "mongoose";
 
-// Define the main user schema
+const cardSchema = new mongoose.Schema({
+  name: String,
+  names: [String],
+  manaCost: String,
+  cmc: Number,
+  colors: [String],
+  colorIdentity: [String],
+  type: String,
+  supertypes: [String],
+  types: [String],
+  subtypes: [String],
+  rarity: String,
+  set: String,
+  text: String,
+  artist: String,
+  number: String,
+  power: String,
+  toughness: String,
+  layout: String,
+  multiverseid: Number,
+  imageUrl: String,
+  rulings: [{ date: String, text: String }],
+  foreignNames: [{ name: String, language: String, multiverseid: Number }],
+  printings: [String],
+  originalText: String,
+  originalType: String,
+  id: String,
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, "username is required"],
-    unique: [true, "username alreasdy exist"],
+    required: [true, "Username is required"],
+    unique: [true, "Username already exists"],
   },
   email: {
     type: String,
-    required: [true, " email is required"],
-    unique: [true, "email already exist"],
+    required: [true, "Email is required"],
+    unique: [true, "Email already exists"],
   },
   hash: {
     type: String,
@@ -20,10 +48,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cards: {
-    type: Object,
-    default: {}, // Default to an empty array
-  },
+  cards: [cardSchema], // Embed the card schema as an array
   createdAt: { type: Date, default: Date.now },
 });
 
